@@ -1,0 +1,84 @@
+---
+description: Rules for working with project Makefile
+globs: **/Makefile
+alwaysApply: false
+---
+
+# Makefile Rules
+
+> Config = `project-config-local.mdc` Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+
+## CONSTRAINTS
+
+**CRITICAL**:
+- Use `make` commands for all build/deploy operations
+- Check available commands via `make help` before execution
+- Use existing make targets from `Makefile`
+- Run commands in dry-run mode when available (e.g., `make target --dry-run`)
+- Require explicit user confirmation or explicit permission in request before executing non-dry-run commands
+
+**MANDATORY**:
+- Add description after `##` for `make help` display
+- Use formatting functions for output
+- Add new commands to `.PHONY` list
+
+**RECOMMENDED**:
+- Use simple names without special characters for agent compatibility
+- Add input parameter validation
+- Use standard return codes (0 for success)
+
+---
+
+## Command Structure
+
+```makefile
+.PHONY: new-command
+
+new-command: prerequisites ## New command description
+	$(call print_header,Operation header)
+	$(call print_step,Executing step...)
+	@command_execution
+	$(call print_success,Operation completed)
+```
+
+**Required elements:**
+- Description after `##` for `make help` display
+- Prefix `@` to hide execution
+- Formatting functions for output
+- Add to `.PHONY` list
+
+## Formatting Functions
+
+```makefile
+$(call print_header,Header)
+$(call print_section,Section)
+$(call print_success,Success)
+$(call print_error,Error)
+$(call print_warning,Warning)
+$(call print_step,Step execution)
+$(call print_info,Information)
+```
+
+## Helper Functions
+
+Projects may define custom helper functions for common operations (process management, service startup, database operations). Use `make help` to discover available commands and functions.
+
+## Execution Safety
+
+- Always check if command supports `--dry-run` or similar flag and use it for automatic execution
+- For real execution, require explicit user confirmation unless user explicitly requests automatic execution
+- Destructive operations (deploy, migrate, delete, cleanup) always require confirmation
+
+## Allowed Direct Commands
+
+- **Debug and diagnostics**: `docker logs`, `docker exec`, system monitoring tools
+- **Interactive development**: Framework-specific shells (e.g., `python manage.py shell`, `rails console`)
+- **Analysis and research**: `git log`, `git diff`, code analysis tools
+
+---
+
+## Scope
+
+In scope: Build commands, deployment operations, development utilities
+Out of scope: Direct Docker/npm/pip commands without make wrapper
+Edge cases: Debug commands may bypass make (see Allowed Direct Commands)

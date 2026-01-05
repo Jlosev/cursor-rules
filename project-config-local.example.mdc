@@ -1,0 +1,123 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+
+# NOTE: This is an example/template, NOT an active rules file!
+# To configure project-specific rules, copy this file to `project-config-local.mdc` and edit as needed.
+# Do not enable or import this example file directly.
+
+# Variable naming conventions for group references:
+# - Use consistent prefixes for related variables (MODULE_*, TEST_*, etc.)
+# - Section names can be referenced as [Section Name] in rules (e.g., [Backend Modules])
+# - Prefix patterns like PREFIX_* expand to all variables with that prefix
+
+# Project Configuration
+
+> This file defines project-specific variables used in other rules via `${VARIABLE}` syntax.
+
+## Project Identity
+
+| Variable | Value |
+|----------|-------|
+| PROJECT_NAME | [YourProject] |
+| PROJECT_TYPE | [e.g., Django backend + React frontend] |
+| PROJECT_TECH_STACK | [e.g., Django, DRF, PostgreSQL, React, TypeScript] |
+| CODE_COMMENT_LANGUAGE | [English/other] |
+
+## Paths
+
+| Variable | Value |
+|----------|-------|
+| BACKEND_PATH | [backend] |
+| FRONTEND_PATH | [frontend] |
+| DOCS_PATH | [docs] |
+| FRONTEND_SRC_PATH | [frontend/src] |
+
+## Project Structure
+
+| Variable | Value |
+|----------|-------|
+| PROJECT_STRUCTURE_TYPE | [workspace/single] |
+| PROJECT_PARTS | [backend:${BACKEND_PATH}, frontend:${FRONTEND_PATH}] |
+
+<!-- PROJECT_STRUCTURE_TYPE: workspace (multiple apps) | single (one app) -->
+<!-- PROJECT_PARTS: comma-separated list of "name:path" pairs, e.g., "backend:backend, frontend:client-web, mobile:mobile-app" -->
+
+## Backend Modules
+
+| Variable | Value |
+|----------|-------|
+| MODULE_[NAME] | [backend/module_name] |
+
+## Testing
+
+| Variable | Value |
+|----------|-------|
+| TESTS_PATH | [backend/tests] |
+| CONFTEST_PATH | [backend/tests/conftest.py] |
+| TEST_CONFIG_FILE | [pytest.ini] |
+| TEST_FRAMEWORK | [pytest + pytest-django] |
+| TEST_MARKERS | [marker1, marker2] |
+
+## Frontend Modules
+
+| Variable | Value |
+|----------|-------|
+| ERROR_HANDLER_MODULE | [error-handler.js] |
+| DOM_UTILS_MODULE | [dom-utils.js] |
+| LOGGER_MODULE | [logger.js] |
+
+## Admin & Templates
+
+| Variable | Value |
+|----------|-------|
+| ADMIN_LIBRARY | [Unfold/default] |
+| ADMIN_BASE_TEMPLATE | [backend/templates/admin/base.html] |
+| ADMIN_CUSTOM_RULES | [admin-custom-local.mdc] |
+
+## Context & Memory
+
+| Variable | Value |
+|----------|-------|
+| CONTEXT_SYSTEM | [Memory MCP/Obsidian/Git history/None] |
+
+<!-- CONTEXT_SYSTEM: System used for storing project context and history -->
+<!-- Examples: "Memory MCP", "Obsidian", "Git history", "None", or comma-separated list -->
+
+## API
+
+| Variable | Value |
+|----------|-------|
+| API_RESPONSE_LANGUAGE | [English] |
+
+## Content & Marketing
+
+| Variable | Value |
+|----------|-------|
+| COMMUNICATIONS_LOG | [docs/content/log.md] |
+| TARGET_AUDIENCE | [description] |
+| PRODUCT_FOCUS | [description] |
+| PROJECT_DOCUMENTATION_DIR | [docs] |
+
+## Makefile
+
+| Variable | Value |
+|----------|-------|
+| MAKEFILE_PATH | [Makefile] |
+
+## Active Rules
+
+| Variable | Value |
+|----------|-------|
+| RULE_BACKEND | [django-backend-rules.mdc or your-custom-backend-rules.mdc] |
+| RULE_FRONTEND | [js-frontend-rules.mdc] |
+| RULE_TESTS | [django-tests-rules.mdc] |
+| RULE_ADMIN | [unfold-rules.mdc] |
+| RULE_MAKEFILE | [makefile-rules.mdc] |
+| RULE_DOCS | [obsidian-docs-rules.mdc] |
+| RULE_INFRA | [yc-cli-rules.mdc] |
+
+<!-- Include only rules you need. Remove unused rows or leave empty. -->
+<!-- You can also specify custom rule files instead of default ones. -->

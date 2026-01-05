@@ -1,0 +1,119 @@
+---
+description: Rules for frontend JavaScript development
+globs: **/client-web/**/*,**/*.js,**/*.jsx,**/*.ts,**/*.tsx
+alwaysApply: false
+---
+
+# Frontend JavaScript Rules
+
+> Config = `project-config-local.mdc` Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+
+## CONSTRAINTS
+
+**CRITICAL**:
+- Use `${ERROR_HANDLER_MODULE}` for all error handling with context
+- Store secrets and API keys in environment variables (use runtime decoder)
+- Validate critical operations on backend
+
+**MANDATORY**:
+- Run ESLint after each code change: `npx eslint ${FRONTEND_SRC_PATH}/*.js`
+- Fix all errors before commit
+- Use `${DOM_UTILS_MODULE}` for DOM operations
+- Use `${LOGGER_MODULE}` for error logging with context
+
+**RECOMMENDED**:
+- Minimize bundle size
+- Use lazy loading where applicable
+- Apply event delegation for performance
+
+---
+
+## JavaScript Best Practices
+
+- Use ES6+ modules (import/export)
+- Follow functional programming principles
+- Use isolated module scope (minimize global variables)
+- Use async/await for asynchronous operations
+- Apply ESLint for code validation
+
+## Code Organization
+
+- Separate code into modules by functionality
+- Use unified naming style (camelCase)
+- Document public API functions
+- Follow single responsibility principle
+- Minimize dependencies between modules
+
+## DOM & Events
+
+- Use `${DOM_UTILS_MODULE}` for DOM work
+- Apply event delegation for better performance
+- Handle events through `${ERROR_HANDLER_MODULE}`
+
+## CSS & Styling
+
+- Implement styling through CSS (minimize JS for styles)
+- Use `${DOM_UTILS_MODULE}` for dynamic styles
+- Use CSS Grid and Flexbox for layout
+- Use CSS variables for configuration
+- Support dark theme when required
+
+## Embeddable Components
+
+- Ensure component works as embeddable element (widget, plugin, third-party integration)
+- Use CSS scoping or prefixes to prevent conflicts with parent page styles
+- Handle various container sizes responsively
+- Isolate component styles from host page context
+
+## Error Handling
+
+```javascript
+// Correct: Always pass context
+errorHandler.wrapSync(fn, { component: 'ComponentName', operation: 'operation_name' });
+
+// Correct: Graceful degradation with fallback
+errorHandler.gracefulDegrade(fn, fallbackFn, { component: 'ComponentName' });
+
+// Correct: Error boundaries for components
+errorHandler.registerBoundary('ComponentName', boundaryHandler);
+```
+
+## Security & Obfuscation
+
+- Access sensitive identifiers through `String.fromCharCode()`:
+  ```javascript
+  const clientId = window[String.fromCharCode(...) + 'CLIENT_ID'];
+  ```
+- Use IIFE wrappers for configuration access patterns
+- Use runtime decoder for environment variables
+- Add new public methods to reserved list in build config
+- Build modes: `dev` (source maps), `prod` (minification), `cdn` (full obfuscation)
+
+## Testing
+
+- Use existing test pages (minimize new test page creation)
+- Use Playwright MCP for automated interface testing
+- Use console debug functions on test page
+- Validate in Chrome, Firefox, Safari, Edge
+
+## Code Quality
+
+- Formatting: 2 spaces, single quotes, semicolon
+- Use ES6+ syntax (const, arrow functions, destructuring)
+- Auto-fix: `npx eslint ${FRONTEND_SRC_PATH}/*.js --fix`
+
+## Architecture Principles
+
+- **Simplicity first**: Start with simple solution
+- **Single entry point**: One main file for initialization and public API
+- **Backward compatibility**: Preserve old API when adding new
+- **Configuration**: Centralize settings in separate module
+- **Minimal client integration**: Automate what client shouldn't do manually
+
+---
+
+## Scope
+
+In scope: Frontend JavaScript code, embeddable components, DOM manipulation, error handling, build configuration
+Out of scope: Backend API, Django templates, server-side rendering
+Edge cases: Complex animations may require specialized libraries

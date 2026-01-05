@@ -1,0 +1,101 @@
+---
+description: Rules for Obsidian documentation
+globs:
+alwaysApply: false
+---
+
+# Obsidian Documentation Rules
+
+> Config = `project-config-local.mdc` Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+
+## CONSTRAINTS
+
+**CRITICAL**:
+- Use MCP server for vault operations when available (see `mcp-rules.mdc` for MCP server details)
+- Create bidirectional links between related documents
+
+**MANDATORY**:
+- Create files only in `${DOCS_PATH}/` and subdirectories
+- Use Wikilinks for internal links: `[[Document Name]]`
+- Use YAML frontmatter for metadata
+- Use standard file tools with Obsidian-compatible formatting as fallback when MCP unavailable
+
+**RECOMMENDED**:
+- Use aliases for readable links: `[[Document Name|Display Text]]`
+- Create index documents for grouping related materials
+- Remove temporary files after use
+
+## Link Syntax
+
+| Type | Syntax | Use case |
+|------|--------|----------|
+| Basic | `[[Document Name]]` | Internal links |
+| Alias | `[[Document Name\|Display Text]]` | Readable links |
+| Section | `[[Document#Header]]` | Link to header |
+| Block | `[[Document#^block-id]]` | Precise links |
+
+## Document Structure
+
+```yaml
+---
+title: Document Name
+tags: [tag1, tag2]
+created: YYYY-MM-DD
+---
+```
+
+## Obsidian Elements
+
+- **Callouts**: `> [!note] Header` + `> Content`
+- **Tasks**: `- [ ]` (pending), `- [x]` (completed)
+- **Tags**: `#backend`, `#frontend`, `#deployment`
+
+## Document Relationships
+
+Create relationships between documents within same task:
+
+| From | To | Link Type |
+|------|----|-----------|
+| Plan | Checklist | `[[checklist-*]]` |
+| Checklist | Guide | `[[guide-*]]` |
+| Guide | Examples | `[[*.example]]` |
+
+## Directory Structure
+
+| Directory | Purpose |
+|-----------|---------|
+| `${DOCS_PATH}/` | General documentation |
+| `${DOCS_PATH}/planing/` | Plans and checklists |
+| `${DOCS_PATH}/code-examples/` | Code and configuration examples |
+
+## Document Naming
+
+**Format**: `<type>-<area>-<name>.md`
+
+| Type | Description |
+|------|-------------|
+| `plan` | Plans and strategies |
+| `checklist` | Execution checklists |
+| `implementation` | Detailed implementation |
+| `guide` | Guides and instructions |
+| `spec` | Technical specifications |
+
+| Area | Description |
+|------|-------------|
+| `backend` | Server-side (Django) |
+| `frontend` | Client-side (widget) |
+| `deployment` | Infrastructure |
+| `system` | System components |
+| `migration` | Migrations |
+| `api` | API and integrations |
+
+---
+
+## Scope
+
+In scope: Documentation in `${DOCS_PATH}/`, Obsidian formatting, document linking
+Out of scope: Code documentation (inline comments), README files in code directories
+
+---
+
+> **TODO**: Consider converting these rules into a skill in future updates for better modularity and reusability.

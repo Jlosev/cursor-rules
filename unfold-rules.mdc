@@ -1,0 +1,146 @@
+---
+description: Rules for Django Unfold admin interface (apply only if project uses Unfold)
+globs: **/admin.py, **/admin_mixins.py, **/templates/admin/**/*.html, **/unfold/**/*
+alwaysApply: false
+---
+
+# Unfold Admin Rules
+
+> Config = `project-config-local.mdc` Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+
+> **Note**: For project-specific admin customizations, see `${ADMIN_CUSTOM_RULES}`.
+
+## CONSTRAINTS
+
+**CRITICAL**:
+- Extend all admin pages from `admin/base.html`
+- Only `${ADMIN_BASE_TEMPLATE}` extends `unfold/layouts/base.html`
+
+**MANDATORY**:
+- Base admin classes must inherit from `unfold.admin.ModelAdmin` (in project: use `RestrictedAdminMixin` from `${MODULE_CORE}/admin.py`)
+- Use project's custom `UnfoldAdminMixin` (from `${MODULE_CORE}/admin_mixins.py`) as mixin for automatic widget application
+- Use Unfold widgets instead of Django default widgets
+- Place custom pages in `${BACKEND_PATH}/templates/admin/`
+
+**RECOMMENDED**:
+- Use `formfield_overrides` for specific field types
+- Apply Unfold breadcrumb pattern for navigation
+
+---
+
+## Template Inheritance
+
+```django
+{# All admin pages extend admin/base.html #}
+{% extends "admin/base.html" %}
+
+{# Only ${ADMIN_BASE_TEMPLATE} extends unfold/layouts/base.html #}
+```
+
+## Breadcrumbs Pattern
+
+```django
+{% block breadcrumbs %}
+<div class="px-4">
+    <div class="container mb-6 mx-auto -my-3 lg:mb-12">
+        <ul class="flex flex-wrap">
+            {% url 'admin:index' as link %}
+            {% trans 'Home' as name %}
+            {% include 'unfold/helpers/breadcrumb_item.html' with link=link name=name %}
+            {% trans 'Your Page' as name %}
+            {% include 'unfold/helpers/breadcrumb_item.html' with name=name %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+```
+
+## Settings
+
+- `TEMPLATES['DIRS']` must include `templates`
+- Use `UNFOLD['STYLES']` and `UNFOLD['SCRIPTS']` for global assets
+
+## Form Field Styling
+
+Use project's custom `UnfoldAdminMixin` together with base class inheriting from `unfold.admin.ModelAdmin`:
+
+```python
+from core.admin_mixins import UnfoldAdminMixin
+from core.admin import RestrictedAdminMixin  # Inherits from unfold.admin.ModelAdmin
+
+class MyAdmin(UnfoldAdminMixin, RestrictedAdminMixin):
+    # UnfoldAdminMixin automatically applies Unfold widgets to all form fields
+    # RestrictedAdminMixin provides base ModelAdmin functionality from unfold.admin.ModelAdmin
+    pass
+```
+
+**Note**: `UnfoldAdminMixin` is a project-specific mixin (not standard Unfold) that automatically applies Unfold widgets to forms. It must be used together with a base class that inherits from `unfold.admin.ModelAdmin`.
+
+Use `formfield_overrides` for specific field types:
+
+```python
+formfield_overrides = {
+    models.TextField: {"widget": WysiwygWidget},
+    models.ArrayField: {"widget": ArrayWidget},
+}
+```
+
+## Available Widgets
+
+| Category | Widgets |
+|----------|---------|
+| Text | `UnfoldAdminTextInputWidget`, `UnfoldAdminTextareaWidget` |
+| Specialized | `UnfoldAdminEmailInputWidget`, `UnfoldAdminURLInputWidget` |
+| Numbers | `UnfoldAdminIntegerFieldWidget`, `UnfoldAdminDecimalFieldWidget` |
+| Dates | `UnfoldAdminDateWidget`, `UnfoldAdminTimeWidget`, `UnfoldAdminSplitDateTimeWidget` |
+| Choices | `UnfoldAdminSelectWidget`, `UnfoldAdminSelectMultipleWidget` |
+| Files | `UnfoldAdminFileFieldWidget`, `UnfoldAdminImageFieldWidget` |
+| Boolean | `UnfoldBooleanSwitchWidget` |
+| Rich text | `WysiwygWidget` (Trix editor) |
+| Arrays | `ArrayWidget` (PostgreSQL arrays) |
+
+## Widget Import Sources
+
+- **From** `unfold.contrib.forms.widgets`: `WysiwygWidget`, `ArrayWidget`
+  - **Note**: Requires `unfold.contrib.forms` in `INSTALLED_APPS`
+- **From** `unfold.widgets`: All `UnfoldAdmin*` widgets (including `UnfoldAdminTextInputWidget`)
+
+## ModelForm Widget Configuration
+
+```python
+from unfold.widgets import (
+    UnfoldBooleanSwitchWidget,
+    UnfoldAdminSelectWidget,
+    UnfoldAdminIntegerFieldWidget,
+)
+
+class WidgetStyleForm(forms.ModelForm):
+    class Meta:
+        widgets = {
+            "position_side": UnfoldAdminSelectWidget(),
+            "position_offset": UnfoldAdminIntegerFieldWidget(attrs={"min": 0, "max": 200}),
+            "is_active": UnfoldBooleanSwitchWidget(),
+        }
+```
+
+## Widget Selection
+
+| Field Type | Use | Instead of |
+|------------|-----|------------|
+| ChoiceField | `UnfoldAdminSelectWidget()` | `forms.Select(attrs={"class": "..."})` |
+| IntegerField | `UnfoldAdminIntegerFieldWidget(attrs={"min": X})` | `forms.NumberInput(attrs={"class": "..."})` |
+| BooleanField | `UnfoldBooleanSwitchWidget()` | `forms.CheckboxInput()` |
+| ForeignKey | Auto-applied via `formfield_for_foreignkey` | N/A |
+
+## Best Practices
+
+- Pass HTML attributes via `attrs` parameter: `UnfoldAdminIntegerFieldWidget(attrs={"min": 0})`
+- Ensure visual consistency across admin interface
+- See [Unfold Documentation](https://unfoldadmin.com/docs/) for complete reference
+
+---
+
+## Scope
+
+In scope: Unfold admin styling, widget configuration, template inheritance
+Out of scope: Custom admin logic (see `${ADMIN_CUSTOM_RULES}`), Django default admin

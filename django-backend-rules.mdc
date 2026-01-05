@@ -1,0 +1,95 @@
+---
+description: Rules for Django backend development
+globs: **/backend/**/*,**/*.py
+alwaysApply: false
+---
+
+# Django Backend Rules
+
+> Config = `project-config-local.mdc` Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+
+> **Note**: For project-specific customizations (admin features, custom integrations, etc.), see `${ADMIN_CUSTOM_RULES}` in config.
+
+## CONSTRAINTS
+
+**CRITICAL**:
+- Apply `select_related()` for ForeignKey and OneToOneField
+- Apply `prefetch_related()` for ManyToManyField and reverse ForeignKey
+- Add `list_select_related` to all ModelAdmin classes
+
+**MANDATORY**:
+- Use Django REST Framework for API endpoints
+- Create migrations for model changes
+- Test migrations on test data
+- Document all API endpoints
+
+**RECOMMENDED**:
+- Use test data factories when available
+- Apply Django signals for event handling between `MODULES_*`
+- Use API versioning (v1, v2) in `urls/` structure
+
+---
+
+## API Development
+
+- Use serializers for data validation
+- Apply permissions for access control
+- Test all API endpoints with pytest and pytest-django
+- Use fixtures and markers for test organization
+
+## Database & ORM
+
+- Use Django ORM for all queries
+- Use `CREATE INDEX CONCURRENTLY` for production indexes
+- Check dependencies via `pg_stat_user_indexes` before deleting indexes
+
+## Admin Interface
+
+- Apply standard `admin/` templates for customization
+- Use Django admin best practices for custom pages
+
+## Security & Validation
+
+- Validate all input data through serializers
+- Use Django permissions and `permissions.py`
+- Apply CSRF protection for all forms
+- Store secrets through `settings.py` configuration
+
+## Code Quality
+
+- Use type hints where applicable
+- Document functions and classes
+- Check code with flake8 and pylint
+- Run tests after changes
+- Format code with black
+- Sort imports with isort
+
+## ORM Optimization Examples
+
+```python
+# ViewSet optimization
+def get_queryset(self):
+    return Model.objects.select_related('foreign_key_field').prefetch_related('related_set')
+
+# Admin optimization
+class ModelAdmin(admin.ModelAdmin):
+    list_select_related = ['foreign_key_field', 'another_fk']
+
+# Query patterns summary:
+# - select_related(): ForeignKey, OneToOneField
+# - prefetch_related(): ManyToManyField, reverse ForeignKey
+# - list_select_related: admin panel lists
+```
+
+## Localization
+
+- Wrap all user strings in `gettext_lazy` for translation
+- Update `.po` files when adding new strings
+
+---
+
+## Scope
+
+In scope: Django backend code, API development, ORM queries, admin interface
+Out of scope: Frontend code, infrastructure configuration
+Edge cases: Complex queries may require raw SQL with confirmation

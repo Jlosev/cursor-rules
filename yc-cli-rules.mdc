@@ -1,0 +1,98 @@
+---
+description: Rules for working with Yandex Cloud infrastructure
+globs:
+alwaysApply: false
+---
+
+# Yandex Cloud CLI Rules
+
+## CONSTRAINTS
+
+**CRITICAL**:
+- Run commands in non-interactive mode
+- Store service account keys outside repository
+- Mask secrets in CI logs
+- Require explicit user confirmation before executing critical operations (delete, destroy, remove, stop, terminate)
+- Use confirmation flags (`--yes`, `--force`) only after user approval
+
+**MANDATORY**:
+- Format output for machine processing: `--format json`
+- Set explicit context: `--cloud-id`, `--folder-id`
+
+**RECOMMENDED**:
+- Use `--async` for long operations
+- Log command parameters in CI artifacts
+
+---
+
+## CLI Installation
+
+```bash
+# Standard installation (macOS/Linux)
+curl -sSL https://{{ s3-storage-host-cli }}{{ yc-install-path }} | bash
+
+# CI/CD non-interactive installation
+curl https://{{ s3-storage-host-cli }}{{ yc-install-path }} | bash -s -- -i /opt/yc -n
+
+# Update components
+yc components update
+```
+
+## Authentication & Profiles
+
+```bash
+# Create profile for scenario
+yc config profile create <profile-name>
+
+# Configure service account
+yc config set service-account-key key.json
+
+# Get temporary token
+yc iam create-token
+```
+
+Store `key.json` outside repository or in CI secrets. Add path to `.gitignore`.
+
+## Context Configuration
+
+```bash
+# Set profile context
+yc config set cloud-id <CLOUD_ID>
+yc config set folder-id <FOLDER_ID>
+
+# Override in command: --cloud-id, --folder-id
+```
+
+## Common Commands
+
+| Operation | Command |
+|-----------|---------|
+| Help | `yc <group> <resource> --help` |
+| List VMs | `yc compute instance list --format json` |
+| Image management | `yc compute image <command>` |
+| Instance groups | `yc compute instance-group <command>` |
+| Registry | `yc cloud-registry artifact <command>` |
+| Load balancer | `yc application-load-balancer http-router <command>` |
+| S3 storage | `yc storage s3 cp <src> <dst>` |
+
+## Agent Execution
+
+- Add flags for non-interactivity
+- Redirect pager output: `| cat`
+- Use separate wait/status commands for async operations
+
+## Debugging
+
+- Enable detailed logs: `--debug`
+- Use status/list commands with `--format json` for diagnostics
+
+---
+
+## Scope
+
+In scope: Yandex Cloud CLI operations, authentication, resource management
+Out of scope: Application deployment logic (see `${RULE_MAKEFILE}`)
+
+---
+
+> **TODO**: Consider converting these rules into a skill in future updates for better modularity and reusability.

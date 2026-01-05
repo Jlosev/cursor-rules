@@ -1,0 +1,46 @@
+---
+description: Rules for MCP server usage
+globs:
+alwaysApply: true
+---
+
+# MCP Server Rules
+
+## CONSTRAINTS
+
+**CRITICAL**:
+- Use MCP servers when available
+- Prioritize MCP servers over standard tools
+
+**MANDATORY**:
+- Check tool availability before use
+- Use standard tools as fallback (graceful degradation)
+
+---
+
+## Available MCP Servers
+
+| Server | Purpose | Usage Guidelines |
+|--------|---------|------------------|
+| **Magic MCP** | React components, UI elements, 21st.dev patterns | React/UI component generation |
+| **Context7** | Library documentation, API references, version-aware solutions | All code-related requests requiring library documentation |
+| **Playwright** | Browser automation, screenshots, E2E testing | Frontend testing (mandatory), backend E2E testing |
+| **Framelink Figma** | Figma files, components, layouts, icons | Design file access and component extraction |
+| **Filesystem** | Bulk file ops, directory trees, pattern search | Extended file operations, bulk reading, metadata |
+| **Obsidian** | Vault operations, wikilinks, frontmatter | Vault operations, see `obsidian-docs-rules.mdc` for details |
+| **GitHub** | GitHub platform interaction, repository management | Issues, PRs, branches, commits, releases, code search, repository operations |
+
+## Fallback Patterns
+
+| Primary | Fallback |
+|---------|----------|
+| Playwright MCP | Cursor Browser (`mcp_cursor-ide-browser_*`) |
+| Obsidian MCP | Standard file tools with Obsidian-compatible formatting |
+| Filesystem MCP | Standard file read/write tools |
+
+---
+
+## Scope
+
+In scope: MCP server selection, tool prioritization, fallback handling
+Out of scope: MCP server configuration, server-specific implementation details

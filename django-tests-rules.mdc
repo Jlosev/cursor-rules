@@ -1,0 +1,115 @@
+---
+description: Rules for Django project tests
+globs: **/test_*.py, **/tests.py, **/*_test.py, **/tests/**/*.py
+alwaysApply: false
+---
+
+# Django Test Rules
+
+> Config = `project-config-local.mdc` Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+
+## CONSTRAINTS
+
+**CRITICAL**:
+- Test ORM optimizations: verify SQL query count (max 2-3 for object list)
+- Check `select_related` and `prefetch_related` in ViewSet and Admin classes
+- Prefer `django_assert_max_num_queries` fixture from pytest-django for query counting
+- Use `connection.queries` with `DEBUG=True` as alternative for special cases
+
+**MANDATORY**:
+- Use test settings from `${TEST_CONFIG_FILE}`
+- Use markers declared in `${TEST_CONFIG_FILE}`
+- Prefer pytest fixtures over `TestCase` inheritance
+- Place common fixtures in `${CONFTEST_PATH}`
+
+**RECOMMENDED**:
+- Use minimal fixture scope (default `function`)
+- Parameterize fixtures through `@pytest.fixture(params=[...])`
+- Document non-trivial dependencies in fixture docstrings
+
+---
+
+## Running Tests
+
+```bash
+# All tests
+python -m pytest ${TESTS_PATH}/ -v
+
+# Specific file
+python -m pytest ${TESTS_PATH}/test_module.py -v
+
+# Single test
+python -m pytest ${TESTS_PATH}/test_module.py::test_function_name -v
+
+# By marker
+python -m pytest -m marker_name -v
+
+# Optimization tests
+python -m pytest -m "orm_optimization or performance" -v
+```
+
+## Fixture Best Practices
+
+- Place module-specific fixtures in local `conftest.py` (separate from global fixtures)
+- Move test data and environment preparation to fixtures
+- Keep tests focused on actions and assertions
+- Name fixtures by purpose and domain
+- Keep fixtures atomic and independent
+
+## ORM Optimization Tests
+
+**Preferred approach** - use `django_assert_max_num_queries` fixture:
+
+```python
+@pytest.mark.django_db
+@pytest.mark.orm_optimization
+def test_viewset_optimization(django_assert_max_num_queries, client):
+    with django_assert_max_num_queries(2):
+        response = client.get('/api/v1/endpoint/')
+    # Automatically asserts max 2 queries, captures SQL for inspection
+
+@pytest.mark.django_db
+@pytest.mark.admin_optimization
+def test_admin_list_select_related(django_assert_max_num_queries):
+    admin = ModelAdmin(Model, admin.site)
+    with django_assert_max_num_queries(1):
+        queryset = admin.get_queryset(None)
+        list(queryset)  # Execute query
+    # Automatically asserts single query only
+```
+
+**Alternative approach** - use `connection.queries` for special cases (e.g., SQL inspection):
+
+```python
+from django.test.utils import override_settings
+from django.db import connection
+
+@pytest.mark.django_db
+@pytest.mark.orm_optimization
+@override_settings(DEBUG=True)
+def test_viewset_optimization_with_sql_inspection(client):
+    connection.queries.clear()
+    response = client.get('/api/v1/endpoint/')
+    assert len(connection.queries) <= 2  # Max 2 queries
+    queries_text = ' '.join([q['sql'] for q in connection.queries])
+    assert 'JOIN' in queries_text  # JOINs from select_related
+```
+
+## Test Markers
+
+Add to `${TEST_CONFIG_FILE}`:
+
+```ini
+markers =
+    orm_optimization: Tests for ORM query optimizations
+    performance: Performance-related tests
+    admin_optimization: Admin interface optimization tests
+```
+
+---
+
+## Scope
+
+In scope: Backend tests, pytest fixtures, ORM optimization validation
+Out of scope: Frontend tests (use `${RULE_FRONTEND}`), E2E tests with Playwright
+Edge cases: Long-running tests require `performance` marker
