@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Django Backend Rules
 
-> Config = `project-config-local.mdc` Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
 
 > **Note**: For project-specific customizations (admin features, custom integrations, etc.), see `${ADMIN_CUSTOM_RULES}` in config.
 

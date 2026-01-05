@@ -6,14 +6,14 @@ alwaysApply: false
 
 # Makefile Rules
 
-> Config = `project-config-local.mdc` Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
 
 ## CONSTRAINTS
 
 **CRITICAL**:
 - Use `make` commands for all build/deploy operations
 - Check available commands via `make help` before execution
-- Use existing make targets from `Makefile`
+- Use existing make targets from @Makefile
 - Run commands in dry-run mode when available (e.g., `make target --dry-run`)
 - Require explicit user confirmation or explicit permission in request before executing non-dry-run commands
 

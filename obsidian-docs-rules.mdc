@@ -6,12 +6,12 @@ alwaysApply: false
 
 # Obsidian Documentation Rules
 
-> Config = `project-config-local.mdc` Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
 
 ## CONSTRAINTS
 
 **CRITICAL**:
-- Use MCP server for vault operations when available (see `mcp-rules.mdc` for MCP server details)
+- Use MCP server for vault operations when available (see @mcp-rules.mdc for MCP server details)
 - Create bidirectional links between related documents
 
 **MANDATORY**:

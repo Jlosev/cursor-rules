@@ -63,7 +63,7 @@ alwaysApply: [true/false]
 
 # [Rule Name]
 
-> Config = `project-config-local.mdc`
+> Config = @project-config-local.mdc
 
 ## CONSTRAINTS
 
@@ -158,7 +158,7 @@ Default for universal rules: Markdown with `##` sections
 ## Variables
 
 Syntax: `${VARIABLE_NAME}` (UPPER_SNAKE_CASE)
-Define in: `project-config-local.mdc`
+Define in: @project-config-local.mdc
 Groups: `[Section Name]`, `PREFIX_*`
 
 ## Rule Types

@@ -4,7 +4,7 @@ alwaysApply: false
 
 # Content Editor Rules
 
-> Config = `project-config-local.mdc` Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
 
 > Role: Expert content editor, product marketer, and social media manager.
 

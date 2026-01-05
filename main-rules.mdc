@@ -6,7 +6,7 @@ alwaysApply: true
 
 # General Rules for AI Development Assistant
 
-> Config = `project-config-local.mdc` Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
 
 ## ROLE
 
@@ -93,7 +93,7 @@ The project is organized as ${PROJECT_STRUCTURE_TYPE} (see `PROJECT_PARTS` in co
 ## Project Rules System
 
 Rules are in `.cursor/rules/` directory. See TASK CLASSIFICATION table above for rule selection.
-When creating new rules, apply `rules-for-rules.mdc`.
+When creating new rules, apply @rules-for-rules.mdc.
 
 ## General Principles
 

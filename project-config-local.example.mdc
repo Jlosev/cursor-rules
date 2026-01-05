@@ -56,8 +56,8 @@ alwaysApply: false
 | Variable | Value |
 |----------|-------|
 | TESTS_PATH | [backend/tests] |
-| CONFTEST_PATH | [backend/tests/conftest.py] |
-| TEST_CONFIG_FILE | [pytest.ini] |
+| CONFTEST_PATH | [@backend/tests/conftest.py] |
+| TEST_CONFIG_FILE | [@pytest.ini] |
 | TEST_FRAMEWORK | [pytest + pytest-django] |
 | TEST_MARKERS | [marker1, marker2] |
 
@@ -65,17 +65,17 @@ alwaysApply: false
 
 | Variable | Value |
 |----------|-------|
-| ERROR_HANDLER_MODULE | [error-handler.js] |
-| DOM_UTILS_MODULE | [dom-utils.js] |
-| LOGGER_MODULE | [logger.js] |
+| ERROR_HANDLER_MODULE | [@error-handler.js] |
+| DOM_UTILS_MODULE | [@dom-utils.js] |
+| LOGGER_MODULE | [@logger.js] |
 
 ## Admin & Templates
 
 | Variable | Value |
 |----------|-------|
 | ADMIN_LIBRARY | [Unfold/default] |
-| ADMIN_BASE_TEMPLATE | [backend/templates/admin/base.html] |
-| ADMIN_CUSTOM_RULES | [admin-custom-local.mdc] |
+| ADMIN_BASE_TEMPLATE | [@backend/templates/admin/base.html] |
+| ADMIN_CUSTOM_RULES | [@admin-custom-local.mdc] |
 
 ## Context & Memory
 
@@ -96,7 +96,7 @@ alwaysApply: false
 
 | Variable | Value |
 |----------|-------|
-| COMMUNICATIONS_LOG | [docs/content/log.md] |
+| COMMUNICATIONS_LOG | [@docs/content/log.md] |
 | TARGET_AUDIENCE | [description] |
 | PRODUCT_FOCUS | [description] |
 | PROJECT_DOCUMENTATION_DIR | [docs] |
@@ -105,19 +105,19 @@ alwaysApply: false
 
 | Variable | Value |
 |----------|-------|
-| MAKEFILE_PATH | [Makefile] |
+| MAKEFILE_PATH | [@Makefile] |
 
 ## Active Rules
 
 | Variable | Value |
 |----------|-------|
-| RULE_BACKEND | [django-backend-rules.mdc or your-custom-backend-rules.mdc] |
-| RULE_FRONTEND | [js-frontend-rules.mdc] |
-| RULE_TESTS | [django-tests-rules.mdc] |
-| RULE_ADMIN | [unfold-rules.mdc] |
-| RULE_MAKEFILE | [makefile-rules.mdc] |
-| RULE_DOCS | [obsidian-docs-rules.mdc] |
-| RULE_INFRA | [yc-cli-rules.mdc] |
+| RULE_BACKEND | [@django-backend-rules.mdc or @your-custom-backend-rules.mdc] |
+| RULE_FRONTEND | [@js-frontend-rules.mdc] |
+| RULE_TESTS | [@django-tests-rules.mdc] |
+| RULE_ADMIN | [@unfold-rules.mdc] |
+| RULE_MAKEFILE | [@makefile-rules.mdc] |
+| RULE_DOCS | [@obsidian-docs-rules.mdc] |
+| RULE_INFRA | [@yc-cli-rules.mdc] |
 
 <!-- Include only rules you need. Remove unused rows or leave empty. -->
 <!-- You can also specify custom rule files instead of default ones. -->

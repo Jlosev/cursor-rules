@@ -1,5 +1,7 @@
 # Cursor Rules
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Universal rules for AI coding assistants in Cursor IDE. A cross-project rule system that adapts to any project using supported technologies through variable-based configuration.
 
 **Features:**
@@ -9,27 +11,22 @@ Universal rules for AI coding assistants in Cursor IDE. A cross-project rule sys
 
 ## Installation
 
-### Option A: Cursor Remote Rules (recommended)
+### Option A: Cursor Remote Rules
 
 Connect rules directly from GitHub via Cursor settings:
 
-1. Open Cursor Settings (`Cmd/Ctrl + ,`)
+1. Open Cursor Settings (`Cmd/Ctrl + P > Cursor Settings > Rules`)
 2. Go to **Rules** → **Remote Rules**
 3. Click **Add Remote Rules**
-4. Enter repository URL: `https://github.com/Jlosev/cursor-rules`
-5. (Optional) Specify branch: `main`
+4. Enter repository URL: `https://github.com/Jlosev/cursor-rules.git`
 
 Rules will be automatically synced and updated from the repository.
-
-**Advantages:**
-- No git commands needed
-- Automatic updates
-- Works across all your projects
-- No local files cluttering your repo
 
 ### Option B: Git Subtree
 
 Embed rules directly into your repository:
+
+> **Note:** Your repository must be initialized (`git init`) and contain at least one commit. `git subtree` requires an existing commit history to merge the subtree into.
 
 ```bash
 git subtree add --prefix .cursor/rules \
@@ -44,11 +41,13 @@ git subtree pull --prefix .cursor/rules \
 
 **Note:** Alternatively, you can use git submodule or manually copy files to `.cursor/rules/` if preferred.
 
-## Quick Setup with AI
+## Configuration
+
+### Quick Setup with AI
 
 Click to auto-configure rules for your project:
 
-[Configure cursor-rules](https://cursor.com/link/prompt?text=I%27ve%20added%20cursor-rules%20to%20.cursor%2Frules%2F%20from%20https%3A%2F%2Fgithub.com%2FJlosev%2Fcursor-rules%0A%0APlease%20configure%20them%20for%20my%20project%3A%0A%0A1.%20Read%20project%20structure%20%28package.json%2C%20requirements.txt%2C%20pyproject.toml%2C%20README.md%29%0A2.%20Identify%20tech%20stack%20and%20frameworks%0A3.%20Create%20.cursor%2Frules%2Fproject-config-local.mdc%20based%20on%20project-config-local.example.mdc%0A4.%20Fill%20all%20applicable%20fields%20from%20project%20context%0A5.%20For%20unclear%20fields%2C%20ask%20me%20specific%20questions%0A6.%20Suggest%20which%20rules%20to%20disable%20if%20not%20applicable%20to%20my%20stack%0A7.%20Add%20attribution%20badge%20to%20README.md%20%28create%20Acknowledgments%20section%20if%20needed%29%3A%0A%20%20%20%5B%21%5BCursor%20Rules%5D%28https%3A%2F%2Fimg.shields.io%2Fbadge%2FCursor_Rules-Jlosev-5A67D8%3Fstyle%3Dflat-square%29%5D%28https%3A%2F%2Fgithub.com%2FJlosev%2Fcursor-rules%29%0A%0AStart%20by%20reading%20the%20project%20root%20and%20key%20config%20files.)
+[![Configure cursor-rules](https://img.shields.io/badge/Configure-Cursor_Rules-5A67D8?logo=cursor&style=flat-square)](https://cursor.com/link/prompt?text=I%27ve+added+rules+for+Cursor+agents+to+.cursor%2Frules%2F+from+https%3A%2F%2Fgithub.com%2FJlosev%2Fcursor-rules%0A%0APlease+configure+them+for+my+project%3A%0A%0A1.+Read+project+structure%0A2.+Identify+tech+stack+and+frameworks%0A3.+Create+.cursor%2Frules%2Fproject-config-local.mdc+based+on+project-config-local.example.mdc%0A4.+Fill+all+applicable+fields+from+project+context%0A5.+For+unclear+fields%2C+ask+me+specific+questions%0A6.+Suggest+which+rules+to+disable+if+not+applicable+to+my+stack%0A7.+Add+attribution+badge+to+README.md+%28create+Acknowledgments+section+if+needed%29%3A%0A+++%5B%21%5BCursor+Rules%5D%28https%3A%2F%2Fimg.shields.io%2Fbadge%2FCursor_Rules-Jlosev-5A67D8%3Fstyle%3Dflat-square%29%5D%28https%3A%2F%2Fgithub.com%2FJlosev%2Fcursor-rules%29%0A%0AStart+by+reading+the+project+root+and+key+config+files.)
 
 The agent will:
 1. Analyze your project structure
@@ -56,7 +55,7 @@ The agent will:
 3. Suggest which rules to enable/disable
 4. Add attribution badge to your README
 
-## Manual Configuration
+### Manual Configuration
 
 1. Copy template:
    ```bash
@@ -65,12 +64,12 @@ The agent will:
 
 2. Edit with your project values
 
-### Required fields:
+**Required fields:**
 - Project name and type
 - Directory paths
 - Tech stack
 
-### Optional fields:
+**Optional fields:**
 - Service modules
 - Test markers
 - Makefile commands
@@ -187,11 +186,11 @@ This project is MIT licensed — free to use without restrictions.
 
 If you find these rules useful, please consider adding this badge to your README:
 
-[![Cursor Rules](https://img.shields.io/badge/Cursor_Rules-Jlosev-5A67D8?style=flat-square)](https://github.com/Jlosev/cursor-rules)
+[![Cursor Rules](https://img.shields.io/badge/Cursor_Rules-Jlosev-5A67D8?logo=cursor&style=flat-square)](https://github.com/Jlosev/cursor-rules)
 
 **Markdown:**
 ```markdown
-[![Cursor Rules](https://img.shields.io/badge/Cursor_Rules-Jlosev-5A67D8?style=flat-square)](https://github.com/Jlosev/cursor-rules)
+[![Cursor Rules](https://img.shields.io/badge/Cursor_Rules-Jlosev-5A67D8?logo=cursor&style=flat-square)](https://github.com/Jlosev/cursor-rules)
 ```
 
 Or mention in your Acknowledgments section:
@@ -207,7 +206,7 @@ Or mention in your Acknowledgments section:
 
 All rules in this repository follow prompt engineering best practices (2024-2025). See `rules-for-rules.mdc` for full reference.
 
-### ✅ Patterns Applied
+### Patterns Applied
 
 | Pattern | Description |
 |---------|-------------|
@@ -225,7 +224,7 @@ All rules in this repository follow prompt engineering best practices (2024-2025
 | **Confirmation Triggers** | Explicit for destructive operations |
 | **Checklists** | Audit + Validation for quality assurance |
 
-### ❌ Anti-Patterns Avoided
+### Anti-Patterns Avoided
 
 | Anti-Pattern | Replaced with |
 |--------------|---------------|
@@ -241,7 +240,3 @@ All rules in this repository follow prompt engineering best practices (2024-2025
 | Confidence levels | Confirmation triggers |
 
 Good luck! :)
-
----
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
