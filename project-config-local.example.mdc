@@ -7,6 +7,8 @@ alwaysApply: false
 # NOTE: This is an example/template, NOT an active rules file!
 # To configure project-specific rules, copy this file to `project-config-local.mdc` and edit as needed.
 # Do not enable or import this example file directly.
+# Set `alwaysApply: true` in the frontmatter of `project-config-local.mdc`
+# Remove all instructional comments (like this one) from the target file
 
 # Variable naming conventions for group references:
 # - Use consistent prefixes for related variables (MODULE_*, TEST_*, etc.)

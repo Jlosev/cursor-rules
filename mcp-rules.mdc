@@ -15,6 +15,7 @@ alwaysApply: true
 **MANDATORY**:
 - Check tool availability before use
 - Use standard tools as fallback (graceful degradation)
+- If required MCP server is not available, use Docker MCP to find, connect and use it for the task
 
 ---
 
@@ -29,6 +30,7 @@ alwaysApply: true
 | **Filesystem** | Bulk file ops, directory trees, pattern search | Extended file operations, bulk reading, metadata |
 | **Obsidian** | Vault operations, wikilinks, frontmatter | Vault operations, see @obsidian-docs-rules.mdc for details |
 | **GitHub** | GitHub platform interaction, repository management | Issues, PRs, branches, commits, releases, code search, repository operations |
+| **Docker MCP** | MCP server discovery, connection, and management | Finding, connecting, and using MCP servers when not available locally |
 
 ## Fallback Patterns
 
@@ -37,6 +39,12 @@ alwaysApply: true
 | Playwright MCP | Cursor Browser (`mcp_cursor-ide-browser_*`) |
 | Obsidian MCP | Standard file tools with Obsidian-compatible formatting |
 | Filesystem MCP | Standard file read/write tools |
+
+---
+
+## Output Requirements
+
+Format: Tool selection and usage | No specific output format required | Apply fallback patterns when MCP unavailable
 
 ---
 

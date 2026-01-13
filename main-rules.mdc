@@ -124,7 +124,7 @@ Use consistently: `TODO: description`, `TODO [HIGH]: description`, `FIXME: issue
 ## File Work
 
 - Create only files required for the assigned task
-- Place temporary files in `/tmp/` directory and remove after use
+- Place temporary files in `tmp/` directory and remove after use
 - Place non-codebase files in `${DOCS_PATH}/` and subdirectories
 - Add files excluded from version control to `.gitignore`
 - Use only current project files for code analysis
