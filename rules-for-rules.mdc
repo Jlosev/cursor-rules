@@ -12,7 +12,7 @@ alwaysApply: false
 
 **MANDATORY**: Actionable verbs (Use, Apply, Avoid) | Examples: 0 or 3-5 | Rewrite negatives as positives | Explicit output format
 
-**RECOMMENDED**: Max 150 lines, 2000 tokens | Atomic concepts | One good/bad pair | Cross-reference related rules
+**RECOMMENDED**: Max 150 lines, 2000 tokens | Token budget: Frontmatter (5%), CONSTRAINTS (15%), Domain (50%), Output (15%), Scope (10%), Other (5%) | Atomic concepts | One good/bad pair | Cross-reference related rules
 
 ## Prompting Patterns Reference
 
@@ -36,6 +36,7 @@ alwaysApply: false
 | **Variables** | `${VAR}` for project-specific values | Reusable rules |
 | **Classification** | Simple/Medium/Complex approaches | Rule complexity |
 | **Checklists** | Audit + Validation lists | Quality assurance |
+| **Success Criteria** | Define measurable success criteria for each step | Multi-step tasks in rules |
 
 ### AVOID in rules:
 
@@ -51,6 +52,7 @@ alwaysApply: false
 - Missing output spec → Output Requirements section
 - Hardcoded values → `${VARIABLE}`
 - Confidence levels (HIGH/MED/LOW) → use explicit confirmation triggers instead
+- Micro-context in system prompts → Keep system prompt static, move context to user messages
 
 ## Rule Structure Template
 
@@ -89,13 +91,13 @@ In scope: [list] | Out of scope: [list]
 
 Format: Markdown (.mdc) with YAML frontmatter
 Structure: Frontmatter → H1 → CONSTRAINTS → Domain → Output → Scope
-Length: 50-150 lines | Start with actionable content
+Length: 50-200 lines (recommended 150) | Start with actionable content
 
 ## Scope
 
 In scope: Creating, editing, optimizing .mdc rule files
 Out of scope: Runtime prompts, user-facing messages, dynamic content generation
-Edge cases: Split >150 line rules into multiple files or apply compression
+Edge cases: Split >200 line rules into multiple files or apply compression
 
 ## Compression Techniques
 
@@ -107,6 +109,27 @@ Edge cases: Split >150 line rules into multiple files or apply compression
 | Prose lists | Markdown bullets/tables |
 | Passive voice | Active imperatives |
 | Full sentences | Pipe-separated items |
+| Prose descriptions | JSON/structured format |
+
+**Structured formatting example:**
+
+Instead of prose:
+```
+The rule should include a description field that briefly explains what the rule does, a globs field that specifies file patterns, and an alwaysApply field that indicates if the rule applies automatically.
+```
+
+Use structured format:
+```yaml
+description: [brief explanation]
+globs: [file patterns]
+alwaysApply: [true/false]
+```
+
+**Token optimization priority:**
+1. Use structured formats (JSON/YAML) for metadata and lists
+2. Replace prose with tables/bullets
+3. Remove boilerplate phrases
+4. Use pipe-separated items for simple lists
 
 ## Safety & Confirmation
 
@@ -119,6 +142,8 @@ Edge cases: Split >150 line rules into multiple files or apply compression
 Claude: XML (`<task>`, `<context>`) | GPT: JSON (`system`, `task`) | Gemini: Markdown (`##`)
 Default for universal rules: Markdown with `##` sections
 
+**Extended Reasoning** (optional): For reasoning models, support `<thinking>` tags when explicitly requested | Reasoning models handle step-by-step internally, avoid explicit step instructions
+
 ## Rule Classification
 
 | Complexity | Indicators | Approach |
@@ -129,31 +154,33 @@ Default for universal rules: Markdown with `##` sections
 
 ## Checklists
 
-**Audit (existing rules)**:
-- [ ] Explicit goals (measurable, not "help with")
+**Rule validation** (applies to new and existing rules):
+- [ ] Metadata preserved (description, globs, alwaysApply)
 - [ ] Structure: CONSTRAINTS → Domain → Output → Scope
+- [ ] CRITICAL → MANDATORY → RECOMMENDED order
+- [ ] Explicit goals (measurable, not "help with")
+- [ ] Actionable verbs throughout
 - [ ] Examples: 0 or 3-5 (not 1-2)
-- [ ] Output spec present (format, length)
-- [ ] Scope defined (in/out)
+- [ ] Output Requirements section with format and length
+- [ ] Scope section defined (in/out)
 - [ ] Positives only (no "Don't X")
 - [ ] No CoT phrases ("Let's think...")
 - [ ] No boilerplate ("please", "make sure to")
 - [ ] No vague instructions → measurable criteria
 - [ ] Active voice (no "should be used")
 - [ ] Delimiters for structure (##, ---, ```)
-- [ ] ≤150 lines (RECOMMENDED)
-
-**Validation (new rules)**:
-- [ ] Metadata preserved (description, globs, alwaysApply)
-- [ ] CRITICAL → MANDATORY → RECOMMENDED order
-- [ ] Actionable verbs throughout
-- [ ] `${VARIABLE}` for project values
+- [ ] `${VARIABLE}` for project values (no hardcoded values)
 - [ ] Config reference at top (if project-specific)
-- [ ] Output Requirements section
-- [ ] Scope section
 - [ ] No model-specific syntax (unless user requested)
 - [ ] Safety section (if handles external input)
 - [ ] Confirmation triggers (if destructive operations)
+- [ ] System prompt is static (no micro-context)
+- [ ] Success criteria defined for multi-step tasks in rules
+- [ ] No duplicate rules and examples (keep only best representative)
+- [ ] No outdated patterns (remove when superseded)
+- [ ] No excessive metadata (include only what affects rule application)
+- [ ] No redundant constraints (consolidate overlapping requirements)
+- [ ] ≤150 lines (RECOMMENDED, up to 200 for comprehensive rules)
 
 ## Variables
 
