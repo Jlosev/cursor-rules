@@ -66,6 +66,12 @@ Format: Code changes (show only modified sections), structured responses with ap
 - Place at end of response, before closing separator
 - Include only rules explicitly applied for current task (from TASK CLASSIFICATION table)
 
+**Local Config File Check** (when no rules summary is present):
+- At the end of response, check if `project-config-local.mdc` file exists in the project
+- If file is missing and no rules summary is present, append warning:
+  - Format: `⚠️ **Warning:** Local configuration file `project-config-local.mdc` is missing. Rules may not work correctly. Copy `project-config-local.example.mdc` to `project-config-local.mdc` and configure it.`
+- Omit this warning when rules summary is present
+
 ## UNCERTAINTY MANAGEMENT
 
 **State explicitly when**:
