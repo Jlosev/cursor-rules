@@ -44,7 +44,7 @@ alwaysApply: true
 
 ## Output Requirements
 
-Format: Tool selection and usage | No specific output format required | Apply fallback patterns when MCP unavailable
+Format: Tool selection and usage | No specific output format required | Apply fallback patterns when MCP unavailable | Length: Concise tool selection with fallback strategy
 
 ---
 

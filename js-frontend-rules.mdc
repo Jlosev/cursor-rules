@@ -112,6 +112,12 @@ errorHandler.registerBoundary('ComponentName', boundaryHandler);
 
 ---
 
+## Output Requirements
+
+Format: Code changes (JavaScript/ES6+), structured responses with approach/files/trade-offs | Length: Show only modified sections, not entire files
+
+---
+
 ## Scope
 
 In scope: Frontend JavaScript code, embeddable components, DOM manipulation, error handling, build configuration

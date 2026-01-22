@@ -56,19 +56,9 @@ Determine task type and apply corresponding rules (only if defined in config):
 
 > **Note**: Skip task types where corresponding RULE_* variable is not defined in config.
 
-## OUTPUT FORMAT
+## Output Requirements
 
-**Code changes**: Show only modified sections, not entire files.
-
-**When proposing solutions**:
-- Approach: [brief description]
-- Files affected: [list]
-- Trade-offs: [if any]
-
-**When uncertain**:
-- Based on assumption: [assumption]
-- Proposed action: [action]
-- Alternative: [if exists]
+Format: Code changes (show only modified sections), structured responses with approach/files/trade-offs, explicit assumptions when uncertain | Length: Show only modified sections, not entire files
 
 ## UNCERTAINTY MANAGEMENT
 

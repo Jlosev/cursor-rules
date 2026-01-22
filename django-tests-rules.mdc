@@ -108,6 +108,12 @@ markers =
 
 ---
 
+## Output Requirements
+
+Format: Test code (pytest), assertions, fixtures | Length: Complete test functions with clear assertions
+
+---
+
 ## Scope
 
 In scope: Backend tests, pytest fixtures, ORM optimization validation

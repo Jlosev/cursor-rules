@@ -140,6 +140,12 @@ class WidgetStyleForm(forms.ModelForm):
 
 ---
 
+## Output Requirements
+
+Format: Code changes (Python/Django admin, Django templates), structured responses | Length: Show only modified sections, not entire files
+
+---
+
 ## Scope
 
 In scope: Unfold admin styling, widget configuration, template inheritance

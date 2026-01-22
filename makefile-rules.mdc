@@ -77,6 +77,12 @@ Projects may define custom helper functions for common operations (process manag
 
 ---
 
+## Output Requirements
+
+Format: Makefile commands, structured output with formatting functions | Length: Complete command definitions with descriptions
+
+---
+
 ## Scope
 
 In scope: Build commands, deployment operations, development utilities

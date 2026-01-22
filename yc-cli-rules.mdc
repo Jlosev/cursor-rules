@@ -88,6 +88,12 @@ yc config set folder-id <FOLDER_ID>
 
 ---
 
+## Output Requirements
+
+Format: Command output, JSON format (`--format json`), structured responses | Length: Complete commands with flags and context
+
+---
+
 ## Scope
 
 In scope: Yandex Cloud CLI operations, authentication, resource management

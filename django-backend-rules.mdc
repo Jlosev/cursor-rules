@@ -88,6 +88,12 @@ class ModelAdmin(admin.ModelAdmin):
 
 ---
 
+## Output Requirements
+
+Format: Code changes (Python/Django), structured responses with approach/files/trade-offs | Length: Show only modified sections, not entire files
+
+---
+
 ## Scope
 
 In scope: Django backend code, API development, ORM queries, admin interface

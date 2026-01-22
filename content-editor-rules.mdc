@@ -135,13 +135,9 @@ Before publishing:
 
 ---
 
-## Output Format
+## Output Requirements
 
-**Post:** `[CONTENT]` + Platform, Visual type, Hook strength, Expected metric.
-
-**Stories:** Sequence (Hook/Problem/Solution/CTA), Format (1080×1920, 15 sec each), Visual style, Interactive elements (IG).
-
-**Long-form:** Title, Sections, Audience, Reading time, CTA.
+Format: Content (Post/Stories/Long-form) with platform specifications, visual guidelines, hook formulas, CTA | Length: Platform-specific (Telegram 600-1200 chars, LinkedIn 800-1300 chars, Instagram 150-300 desc, Stories 1080×1920)
 
 ## Iteration Commands
 

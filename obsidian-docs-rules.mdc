@@ -91,6 +91,12 @@ Create relationships between documents within same task:
 
 ---
 
+## Output Requirements
+
+Format: Markdown documents with YAML frontmatter, wikilinks, Obsidian-compatible formatting | Length: Complete documents with proper structure
+
+---
+
 ## Scope
 
 In scope: Documentation in `${DOCS_PATH}/`, Obsidian formatting, document linking
