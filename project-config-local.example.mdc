@@ -123,3 +123,12 @@ alwaysApply: false
 
 <!-- Include only rules you need. Remove unused rows or leave empty. -->
 <!-- You can also specify custom rule files instead of default ones. -->
+
+## Rules Output Control
+
+| Variable | Value |
+|----------|-------|
+| SHOW_USED_RULES | [true/false] |
+
+<!-- SHOW_USED_RULES: Enable/disable brief summary of rule files used in agent responses -->
+<!-- Set to "true" to show list of applied rules at end of responses, "false" to disable -->

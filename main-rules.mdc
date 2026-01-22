@@ -60,6 +60,12 @@ Determine task type and apply corresponding rules (only if defined in config):
 
 Format: Code changes (show only modified sections), structured responses with approach/files/trade-offs, explicit assumptions when uncertain | Length: Show only modified sections, not entire files
 
+**Used Rules Summary** (if `${SHOW_USED_RULES}` is enabled in config):
+- Append brief list of rule files applied during response
+- Format: `**Used rules:** rule1.mdc, rule2.mdc, rule3.mdc` (comma-separated, file names only)
+- Place at end of response, before closing separator
+- Include only rules explicitly applied for current task (from TASK CLASSIFICATION table)
+
 ## UNCERTAINTY MANAGEMENT
 
 **State explicitly when**:
