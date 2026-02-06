@@ -6,9 +6,9 @@ alwaysApply: false
 
 # Django Backend Rules
 
-> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc
 
-> **Note**: For project-specific customizations (admin features, custom integrations, etc.), see `${ADMIN_CUSTOM_RULES}` in config.
+> **Note**: For project-specific customizations (admin features, custom integrations, etc.), see `${ADMIN_CUSTOM_RULES}` in config
 
 ## CONSTRAINTS
 
@@ -98,4 +98,4 @@ Format: Code changes (Python/Django), structured responses with approach/files/t
 
 In scope: Django backend code, API development, ORM queries, admin interface
 Out of scope: Frontend code, infrastructure configuration
-Edge cases: Complex queries may require raw SQL with confirmation
+Fallback: Complex queries may require raw SQL with confirmation

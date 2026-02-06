@@ -6,9 +6,9 @@ alwaysApply: false
 
 # Unfold Admin Rules
 
-> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc
 
-> **Note**: For project-specific admin customizations, see `${ADMIN_CUSTOM_RULES}`.
+> **Note**: For project-specific admin customizations, see `${ADMIN_CUSTOM_RULES}`
 
 ## CONSTRAINTS
 
@@ -150,3 +150,4 @@ Format: Code changes (Python/Django admin, Django templates), structured respons
 
 In scope: Unfold admin styling, widget configuration, template inheritance
 Out of scope: Custom admin logic (see `${ADMIN_CUSTOM_RULES}`), Django default admin
+Fallback: Request clarification for custom admin requirements not covered by Unfold

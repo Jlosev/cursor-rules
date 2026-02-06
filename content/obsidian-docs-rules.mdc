@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Obsidian Documentation Rules
 
-> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc
 
 ## CONSTRAINTS
 
@@ -101,7 +101,4 @@ Format: Markdown documents with YAML frontmatter, wikilinks, Obsidian-compatible
 
 In scope: Documentation in `${DOCS_PATH}/`, Obsidian formatting, document linking
 Out of scope: Code documentation (inline comments), README files in code directories
-
----
-
-> **TODO**: Consider converting these rules into a skill in future updates for better modularity and reusability.
+Fallback: Use standard file tools with Obsidian-compatible formatting when MCP unavailable

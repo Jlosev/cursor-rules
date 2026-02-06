@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Makefile Rules
 
-> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc
 
 ## CONSTRAINTS
 
@@ -87,4 +87,4 @@ Format: Makefile commands, structured output with formatting functions | Length:
 
 In scope: Build commands, deployment operations, development utilities
 Out of scope: Direct Docker/npm/pip commands without make wrapper
-Edge cases: Debug commands may bypass make (see Allowed Direct Commands)
+Fallback: Debug commands may bypass make (see Allowed Direct Commands)

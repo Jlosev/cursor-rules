@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Frontend JavaScript Rules
 
-> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc
 
 ## CONSTRAINTS
 
@@ -122,4 +122,4 @@ Format: Code changes (JavaScript/ES6+), structured responses with approach/files
 
 In scope: Frontend JavaScript code, embeddable components, DOM manipulation, error handling, build configuration
 Out of scope: Backend API, Django templates, server-side rendering
-Edge cases: Complex animations may require specialized libraries
+Fallback: Complex animations may require specialized libraries

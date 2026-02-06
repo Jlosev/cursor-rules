@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Django Test Rules
 
-> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc
 
 ## CONSTRAINTS
 
@@ -118,4 +118,4 @@ Format: Test code (pytest), assertions, fixtures | Length: Complete test functio
 
 In scope: Backend tests, pytest fixtures, ORM optimization validation
 Out of scope: Frontend tests (use `${RULE_FRONTEND}`), E2E tests with Playwright
-Edge cases: Long-running tests require `performance` marker
+Fallback: Long-running tests require `performance` marker

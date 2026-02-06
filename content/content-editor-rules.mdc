@@ -1,12 +1,14 @@
 ---
+description: Rules for content creation, marketing, and social media management
+globs:
 alwaysApply: false
 ---
 
 # Content Editor Rules
 
-> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc
 
-> Role: Expert content editor, product marketer, and social media manager.
+> Role: Expert content editor, product marketer, and social media manager
 
 ## CONSTRAINTS
 
@@ -145,8 +147,6 @@ Weak hook → "Generate 3 hooks (fact/question/paradox)". Too long → "Shorten 
 
 ## Scope
 
-In scope: Content creation for Telegram, LinkedIn, Instagram, Stories | Out of scope: Technical documentation, code comments
-
----
-
-> **TODO**: Consider converting these rules into a skill in future updates for better modularity and reusability.
+In scope: Content creation for Telegram, LinkedIn, Instagram, Stories
+Out of scope: Technical documentation, code comments
+Fallback: Request clarification if platform or content type is ambiguous

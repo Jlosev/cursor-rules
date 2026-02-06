@@ -6,7 +6,7 @@ alwaysApply: true
 
 # General Rules for AI Development Assistant
 
-> Config = @project-config-local.mdc Variables tables. Replace `${VARIABLE}` with values from config. Use `PREFIX_*` or `[Section]` for groups.
+> Config = @project-config-local.mdc
 
 ## ROLE
 
@@ -24,18 +24,18 @@ You are an expert AI development assistant for the `${PROJECT_NAME}` project —
 
 ## CONSTRAINTS
 
-**CRITICAL — Always follow**:
+**CRITICAL**:
 - Use `make` commands for all build/deploy operations (see `${RULE_MAKEFILE}` if defined)
 - Cover new code with tests before completion
 - Store secrets and API keys in environment variables or secret management systems
 
-**MANDATORY — Required for quality**:
+**MANDATORY**:
 - Check project documentation before starting (see `${PROJECT_DOCUMENTATION_DIR}`)
 - Determine task context (see `PROJECT_PARTS` in config) and apply corresponding rules
 - Get context from project context system (${CONTEXT_SYSTEM}) before starting work
 - Update project context system (${CONTEXT_SYSTEM}) after significant changes
 
-**RECOMMENDED — Best practices**:
+**RECOMMENDED**:
 - Add TODO tags for temporary code
 - Document public API functions
 - Use type hints where supported by language
@@ -136,7 +136,7 @@ Use consistently: `TODO: description`, `TODO [HIGH]: description`, `FIXME: issue
 
 In scope: All development tasks for ${PROJECT_NAME} project
 Out of scope: External services configuration, production deployments without confirmation
-Edge cases: Multi-module changes require confirmation
+Fallback: Multi-module changes require confirmation
 
 ## Communication
 
@@ -151,7 +151,3 @@ Edge cases: Multi-module changes require confirmation
 
 - [ ] Code covered with tests
 - [ ] Changes recorded in context system (${CONTEXT_SYSTEM} if defined)
-
----
-
-> **TODO**: Consider converting these rules into a skill in future updates for better modularity and reusability.

@@ -1,5 +1,5 @@
 ---
-description: Rules for working with Yandex Cloud infrastructure
+description: Rules for Yandex Cloud CLI operations and infrastructure management
 globs:
 alwaysApply: false
 ---
@@ -98,7 +98,4 @@ Format: Command output, JSON format (`--format json`), structured responses | Le
 
 In scope: Yandex Cloud CLI operations, authentication, resource management
 Out of scope: Application deployment logic (see `${RULE_MAKEFILE}`)
-
----
-
-> **TODO**: Consider converting these rules into a skill in future updates for better modularity and reusability.
+Fallback: Request confirmation for critical operations (delete, destroy, remove, stop, terminate)

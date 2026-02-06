@@ -102,7 +102,7 @@ Without `main-rules.mdc`, other rules won't be properly connected or configured.
 
 Rules apply automatically based on file paths (`globs`), always (`alwaysApply: true`), or contextually.
 
-### General
+### General (Root)
 
 | Rule | Description | Pattern | Requires |
 |------|-------------|---------|----------|
@@ -110,7 +110,7 @@ Rules apply automatically based on file paths (`globs`), always (`alwaysApply: t
 | `mcp-rules.mdc` | MCP server usage priorities | Always | See below |
 | `rules-for-rules.mdc` | Meta-rules for creating/optimizing rules (context engineering, patterns, checklists) | `**/*.mdc` | — |
 
-### Backend
+### Backend (`backend/`)
 
 | Rule | Description | Pattern | Requires |
 |------|-------------|---------|----------|
@@ -118,32 +118,27 @@ Rules apply automatically based on file paths (`globs`), always (`alwaysApply: t
 | `django-tests-rules.mdc` | pytest, fixtures, markers, ORM testing | `**/test_*.py`, `**/tests/**/*.py` | pytest-django |
 | `unfold-rules.mdc` | Django Unfold admin widgets, templates | `**/admin.py`, `**/templates/admin/**/*` | django-unfold |
 
-### Frontend
+### Frontend (`frontend/`)
 
 | Rule | Description | Pattern | Requires |
 |------|-------------|---------|----------|
 | `js-frontend-rules.mdc` | ES6+ modules, error handling, bundling | `**/client-web/**/*`, `**/*.{js,jsx,ts,tsx}` | — |
 
-### DevOps & Infrastructure
+### Infrastructure (`infrastructure/`)
 
 | Rule | Description | Pattern | Requires |
 |------|-------------|---------|----------|
 | `makefile-rules.mdc` | Make command structure, formatting | `**/Makefile` | — |
 | `yc-cli-rules.mdc` | Yandex Cloud CLI patterns | Contextual | yc CLI |
 
-### Documentation
-
-| Rule | Description | Pattern | Requires |
-|------|-------------|---------|----------|
-| `obsidian-docs-rules.mdc` | Wikilinks, frontmatter, MCP Obsidian | Contextual | MCP Obsidian* |
-
-*Falls back to standard tools if MCP unavailable
-
-### Content & Marketing
+### Content & Documentation (`content/`)
 
 | Rule | Description | Pattern | Requires |
 |------|-------------|---------|----------|
 | `content-editor-rules.mdc` | Infostyle, AIDA, platform specs | Contextual | — |
+| `obsidian-docs-rules.mdc` | Wikilinks, frontmatter, MCP Obsidian | Contextual | MCP Obsidian* |
+
+*Falls back to standard tools if MCP unavailable
 
 ## Modular Rule Selection
 

@@ -1,5 +1,5 @@
 ---
-description: Rules for MCP server usage
+description: Rules for MCP server usage and tool prioritization
 globs:
 alwaysApply: true
 ---
@@ -52,3 +52,4 @@ Format: Tool selection and usage | No specific output format required | Apply fa
 
 In scope: MCP server selection, tool prioritization, fallback handling
 Out of scope: MCP server configuration, server-specific implementation details
+Fallback: Use standard tools when MCP servers unavailable (see Fallback Patterns table)
