@@ -108,7 +108,7 @@ Rules apply automatically based on file paths (`globs`), always (`alwaysApply: t
 |------|-------------|---------|----------|
 | `main-rules.mdc` | Core orchestration, role definition | Always | — |
 | `mcp-rules.mdc` | MCP server usage priorities | Always | See below |
-| `rules-for-rules.mdc` | Meta-rules for creating new rules | `**/*.mdc` | — |
+| `rules-for-rules.mdc` | Meta-rules for creating/optimizing rules (context engineering, patterns, checklists) | `**/*.mdc` | — |
 
 ### Backend
 
@@ -219,24 +219,34 @@ Or mention in your Acknowledgments section:
 
 ## Prompting Patterns Used
 
-All rules in this repository follow prompt engineering best practices (2024-2025). See `rules-for-rules.mdc` for full reference.
+All rules follow context engineering and prompt design best practices (2024-2026). See `rules-for-rules.mdc` for full reference.
+
+**Key approach:** Context engineering — manage entire context (prompt + tools + history + data) as a limited resource, not just prompt text.
 
 ### Patterns Applied
 
 | Pattern | Description |
 |---------|-------------|
 | **Hierarchy** | CRITICAL → MANDATORY → RECOMMENDED priority levels |
-| **Structure** | Frontmatter → H1 → CONSTRAINTS → Domain → Output → Scope |
+| **Structure** | Frontmatter → H1 → CONSTRAINTS → Domain → Context Policy (opt.) → Output → Scope → Self-check (opt.) |
+| **Instructions First** | Instructions and constraints before context/data |
 | **Output Specification** | Explicit format, length, fields in every rule |
-| **Scope & Boundaries** | In scope / Out of scope / Edge cases |
+| **Scope & Boundaries** | In scope / Out of scope / Fallback behavior |
 | **Actionable Verbs** | All instructions start with Use, Apply, Avoid, Check |
+| **Verifiable Instructions** | Each instruction checkable: can determine if fulfilled |
 | **Positive Rewriting** | "Do Y" instead of "Don't X" |
-| **Delimiters** | ##, ---, ``` for visual separation |
-| **Compression** | Boilerplate removed, prose → bullets/tables |
-| **Variables** | `${VAR}` for project-specific values |
-| **Examples 0 or 3-5** | Never 1-2 (insufficient for pattern recognition) |
-| **Safety Guardrails** | Data instructions treated as text |
+| **Separation of Concerns** | Instructions, data, examples separated with explicit delimiters |
+| **Delimiters** | ##, ---, ``` for visual separation; one format per rule |
+| **Compression** | Boilerplate removed, prose → bullets/tables; signal-to-noise optimization |
+| **Graduated Examples** | 0 (obvious) / 1 (simple) / 2-3 (medium) / 3-5 (complex) |
+| **Just-in-time Retrieval** | Prefer `@file` / cross-references over embedding content |
+| **Lost-in-the-middle Recap** | Critical constraints duplicated at rule end for rules >100 lines |
+| **Cache-friendly Ordering** | Static parts first, dynamic context last |
+| **Safety Guardrails** | Data instructions treated as text; untrusted input marked |
+| **Uncertainty Protocol** | If insufficient data: ask 1-3 precise questions, then stop |
 | **Confirmation Triggers** | Explicit for destructive operations |
+| **Self-check Gate** | Built-in verification checklist for complex/agentic rules |
+| **Variables** | `${VAR}` for project-specific values (if project uses config) |
 | **Checklists** | Audit + Validation for quality assurance |
 
 ### Anti-Patterns Avoided
@@ -247,11 +257,13 @@ All rules in this repository follow prompt engineering best practices (2024-2025
 | Model-specific syntax | Universal Markdown |
 | ALL CAPS | `**CRITICAL**:` markers |
 | Negatives ("Don't X") | Positives ("Do Y") |
-| 1-2 examples | 0 or 3-5 |
-| Vague instructions | Measurable criteria |
+| Wrong example count | Graduated: 0/1/2-3/3-5 by complexity |
+| Vague instructions | Measurable, verifiable criteria |
 | Passive voice | Active imperatives |
 | Boilerplate | Deleted |
-| Hardcoded values | `${VARIABLE}` |
+| Hardcoded values | `${VARIABLE}` (if project uses config) |
 | Confidence levels | Confirmation triggers |
+| Mixed delimiter formats | One format per rule (Markdown or XML) |
+| Instructions mixed with data | Separate with explicit sections |
 
 Good luck! :)
