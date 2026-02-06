@@ -14,6 +14,44 @@ alwaysApply: false
 
 **RECOMMENDED**: Max 150 lines, 2000 tokens | Token budget: Frontmatter (5%), CONSTRAINTS (15%), Domain (50%), Output (15%), Scope (10%), Other (5%) | Atomic concepts | One good/bad pair | Cross-reference related rules
 
+## Rule Creation Workflow
+
+### 1. Search Existing Rule Bases
+
+Before creating a rule from scratch, search open rule repositories for existing rules matching the target technology/framework:
+
+- **Primary source**: [awesome-cursorrules](https://github.com/PatrickJS/awesome-cursorrules) (License: CC0 1.0 — public domain, no restrictions)
+  - `rules-new/` — `.mdc` format (preferred): fastapi, python, react, nextjs, typescript, vue, svelte, tailwind, rust, cpp, database, node-express, etc.
+  - `rules/` — legacy `.cursorrules` format: 100+ rules organized by `technology-focus-cursorrules-prompt-file/` directories
+- **Search strategy**: Exact technology name → framework/stack combination → similar domain → generic (clean-code, codequality)
+- **Success criteria**: Found rule covers ≥30% of required functionality
+
+### 2. Adapt & Supplement Found Rules
+
+If existing rule found:
+- Extract applicable patterns, constraints, examples from source
+- Supplement with user's project-specific requirements | Fill gaps not covered by source
+- Remove irrelevant sections | Merge overlapping patterns | Resolve conflicts between imported and new content
+- Convert legacy `.cursorrules` format to `.mdc` with YAML frontmatter if needed
+
+If no match found: Use Rule Structure Template (below) → proceed to Step 3
+
+### 3. Format to Standard
+
+- Apply structure: Frontmatter → H1 → CONSTRAINTS → Domain → Output → Scope
+- Apply Compression Techniques to all imported content (see section below)
+- Replace hardcoded values with `${VARIABLE}` syntax
+- Ensure actionable verbs throughout | Remove boilerplate from imported text
+
+### 4. Self-Validation
+
+Run full Rule Validation checklist (see Checklists section) and additionally verify:
+- No conflicting instructions between imported and added content
+- All user requirements addressed (cross-check against original request)
+- Imported content adapted to project context (not copy-pasted verbatim)
+- Format matches Rule Structure Template | ≤150 lines (≤200 max)
+- Prompting Patterns applied: Hierarchy, Positive Rewriting, Compression, Delimiters (see table below)
+
 ## Prompting Patterns Reference
 
 ### USE in rules:
