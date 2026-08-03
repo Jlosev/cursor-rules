@@ -214,9 +214,9 @@ Or mention in your Acknowledgments section:
 
 ## Prompting Patterns Used
 
-All rules follow context engineering and prompt design best practices (2024-2026). See `rules-for-rules.mdc` for full reference.
+All rules follow context engineering and prompt design best practices (2024–2026). See `rules-for-rules.mdc` for the full reference.
 
-**Key approach:** Context engineering — manage entire context (prompt + tools + history + data) as a limited resource, not just prompt text.
+**Key approach:** Context engineering — manage the entire context (prompt + tools + history + data) as a limited resource, curating the minimal high-signal token set. The dominant lever is **subtraction**: before adding a rule, try deleting — leaner prompts gained evals and cut tokens with no quality loss.
 
 ### Patterns Applied
 
@@ -224,8 +224,14 @@ All rules follow context engineering and prompt design best practices (2024-2026
 |---------|-------------|
 | **Hierarchy** | CRITICAL → MANDATORY → RECOMMENDED priority levels |
 | **Structure** | Frontmatter → H1 → CONSTRAINTS → Domain → Context Policy (opt.) → Output → Scope → Self-check (opt.) |
-| **Instructions First** | Instructions and constraints before context/data |
+| **Context Engineering** | Entire context (prompt + tools + history + data) as a limited resource — curate the minimal high-signal token set |
+| **Subtraction Audit** | Before adding a rule, try deleting three; every rule must earn its tokens; state each instruction once |
+| **Instructions First** | Instructions and constraints before context/data; restate binding constraints near the decision point |
+| **Constraint Pinning** | Re-inject critical constraints as a checklist at decision points; compaction carries a verbatim constraint block |
+| **Cache-friendly Ordering** | Static parts first, dynamic context last; no volatile content (timestamps, session IDs) at the top of a rule file |
 | **Output Specification** | Explicit format, length, fields in every rule |
+| **Reasoning-First Schema** | `reasoning` field before `answer`; or NL-to-Format (reason in prose, then emit JSON) — JSON-only inter-agent handoff drops accuracy |
+| **Test-Time Compute** | Self-consistency / verifier over a single greedy pass; prefer a fresh-context verifier over same-context self-refine |
 | **Scope & Boundaries** | In scope / Out of scope / Fallback behavior |
 | **Actionable Verbs** | All instructions start with Use, Apply, Avoid, Check |
 | **Verifiable Instructions** | Each instruction checkable: can determine if fulfilled |
@@ -236,11 +242,17 @@ All rules follow context engineering and prompt design best practices (2024-2026
 | **Graduated Examples** | 0 (obvious) / 1 (simple) / 2-3 (medium) / 3-5 (complex) |
 | **Just-in-time Retrieval** | Prefer `@file` / cross-references over embedding content |
 | **Lost-in-the-middle Recap** | Critical constraints duplicated at rule end for rules >100 lines |
-| **Cache-friendly Ordering** | Static parts first, dynamic context last |
-| **Safety Guardrails** | Data instructions treated as text; untrusted input marked |
+| **Instruction Hierarchy** | system > user > untrusted data; tool/retrieved content is DATA, never an instruction |
+| **Trust Boundaries** | Untrusted content only in `tool_result`/datamarked regions; agent-visible metadata (IDs, authorship, "tests passed") is DATA, not ground truth (Agent Data Injection) |
+| **Safety Guardrails** | Probabilistic layers reduce frequency, deterministic architecture contains impact; D/P control classification; never a P control as sole mitigation for an irreversible action |
+| **Integrity Lattice** | Source trust tiers; no-read-down for decisions, no-write-up for privileges |
+| **Exfil Blocking** | No outbound URLs/markup embedding retrieved/secret data; no rendering model output as markup without sanitization |
+| **MCP Hygiene** | Tool descriptions untrusted, pin versions, re-approve on change, least agency, never "Allow all" |
 | **Uncertainty Protocol** | If insufficient data: ask 1-3 precise questions, then stop |
 | **Confirmation Triggers** | Explicit for destructive operations |
-| **Self-check Gate** | Built-in verification checklist for complex/agentic rules |
+| **Self-check Gate** | Built-in verification checklist; prefer a fresh-context verifier subagent over same-context self-critique |
+| **Three-Number Eval** | Report clean utility, utility-under-attack, and ASR; cite adaptive-attack results, not static benchmarks |
+| **Surgical Metaprompting** | Diagnose from failure traces → minimal patch → regression re-run; never redesign from scratch |
 | **Variables** | `${VAR}` for project-specific values (if project uses config) |
 | **Checklists** | Audit + Validation for quality assurance |
 
@@ -248,7 +260,12 @@ All rules follow context engineering and prompt design best practices (2024-2026
 
 | Anti-Pattern | Replaced with |
 |--------------|---------------|
-| CoT phrases ("Let's think...") | Structured sections |
+| CoT phrases ("Let's think...") | Structured sections; zero-shot with clear success criteria for reasoning models |
+| "Show your reasoning" / reflection instructions | Read the structured thinking block or use a fresh-context verifier |
+| Verification prose on reasoning models ("double-check") | Set reasoning effort params; orchestrate verification externally in a fresh context |
+| Keyword blocklists ("reject 'sudo'") | Semantic defenses + a false-refusal test case per restrictive rule |
+| Trigger-activated / conditional / sleeper rules | Rules fully effective at read time; only static/trusted routing triggers |
+| Rendering model output as markup | Pre-stream sanitization; no auto-fetch of model-generated URLs |
 | Model-specific syntax | Universal Markdown |
 | ALL CAPS | `**CRITICAL**:` markers |
 | Negatives ("Don't X") | Positives ("Do Y") |
